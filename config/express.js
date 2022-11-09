@@ -6,14 +6,14 @@ let cors = require('cors')
 
 module.exports = function() {
     let app = express()
-    app.set("port", 4000)
+    app.set("port", 4000 || process.env.PORT)
     app.use(express.json())
     app.use(express.urlencoded({ extended: false }))
     app.use(express.static('./public'))
     app.use(cors())
     app.use((res, req, next)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header("Access-Control-Allow-Headers", "GET, PUT, POST, DELETE, Origin, X-Requested-With, Content-Type, Accept");
         next();
     })
     userRouter(app)
